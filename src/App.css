@@ -1,0 +1,117 @@
+.App {
+  display: inline;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+.panel-left{
+  float: left;
+  width: calc(20% - 1px);
+  height: 100vh;
+  border-right: 1px solid black;
+}
+.simple-note{
+  cursor: pointer;
+  height: 50px;
+  padding-left: 5px;
+  padding-top: 20px;
+  font-size: 20px;
+}
+.advanced-note{
+  cursor: pointer;
+  padding-left: 5px;
+  font-size: 20px;
+}
+.simple-note:hover{
+  background-color: lightblue;
+}
+.advanced-note:hover{
+  background-color: lightblue;
+}
+.selected{
+  background-color: lightblue;
+}
+.noneSelected{
+  background-color: white;
+}
+.simple-note-list{
+  border: none;
+  height: 100%;
+}
+.simple-note-list:hover{
+  border-width: 0px;
+}
+.panel-right{
+  float: left;
+  height: 100vh;
+  width: 80%;
+}
+
+.tag{
+  cursor: pointer;
+  margin: 2px;
+  float: left;
+  background-color: gray;
+  border-radius: 18px;
+  padding: 5px;
+  color: white
+}
+.panel-top{
+  width: calc(100% - 10px);
+  margin: 5px;
+  height: 24.6px;
+}
+.item-right{
+  float: right;
+}
+.item-left{
+  float: left;
+}
+.item-top-justify{
+  width: calc(100% - 57px);
+}
+.item-justify{
+  width: calc(100% - 11px);
+  margin: 5px;
+}
+.item-inner-justify{
+  width: calc(100% - 43px);
+}
+.textarea{
+  resize: vertical;
+  height: 150px;
+}
+.item-devide{
+  width: 100%;
+  border-top: 1px solid black;
+  height: 1px;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

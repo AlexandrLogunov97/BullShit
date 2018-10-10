@@ -6,7 +6,6 @@ export class Tag extends Component {
     this.props.onDeleteTag(this.props.tag);
   }
   render() {
-    console.log('tag ', this.props.tag);
     return (
       <div className='tag' onClick={this.onDeleteTag}>
         {

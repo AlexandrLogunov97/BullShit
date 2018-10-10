@@ -3,9 +3,6 @@ import {connect} from 'react-redux';
 import '../App.css';
 
 class SimpleNote extends Component {
-    constructor(props) {
-        super(props);
-    }
     getSelectNote=(e)=>{
         this.props.onSelectNote(this.props.note);
     }

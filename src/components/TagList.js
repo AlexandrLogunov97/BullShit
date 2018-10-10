@@ -8,16 +8,13 @@ class TagList extends Component {
         if (this.props.tagState) {
             if (this.props.mode === 'Create') {
                 this.props.onRemoveTagFromCreatingNote(tag);
-            
             }
             else if (this.props.mode === 'Modify') {
                 this.props.onRemoveTagFromUpdatingNote(tag);
-                console.log(tag,' in modify');
             }
         }
     }
     render() {
-        console.log(this.props);
         return (
             <div>
                 {
@@ -32,7 +29,7 @@ class TagList extends Component {
 
 export default connect(
     (state, ownProps) => {
-        return  ({
+        return ({
             mode: state.notes.mode,
             tags: ownProps.tags
         })

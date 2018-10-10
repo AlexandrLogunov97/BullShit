@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SimpleNote from './SimpleNote';
-
 import '../App.css';
+
 export class SimpleNoteList extends Component {
   render() {
     return (

@@ -14,41 +14,7 @@ class App extends Component {
   onChangeFilterMode=(e)=> {
     this.props.onChangeFilterMode(e.target.value);
   }
-  onUpdateFilterField=(e)=>{
-  }
   onChangeFilterField=(e)=>{
-    /*let newNotes;
-    if (!e.target.value) {
-      newNotes = this.state.notes;
-    }
-    else {
-      let noteList = this.state.notes;
-      let newNotes = [];
-      if (this.state.filterMode === 'Tags') {
-        newNotes = [];
-        noteList.forEach(note => {
-          note.tags.forEach(tag => {
-            if (tag.trim().toLowerCase().includes(e.target.value.trim().toLowerCase()) && newNotes.indexOf(note) === -1) {
-              newNotes.push(note);
-            }
-          })
-        });
-
-      }
-      else if (this.state.filterMode === 'Title') {
-        newNotes = [];
-        noteList.forEach(note => {
-          if (note.title.trim().toLowerCase().includes(e.target.value.trim().toLowerCase())) {
-            newNotes.push(note);
-          }
-        })
-
-      }
-      this.setState({
-        filteredNotes: newNotes
-      });
-    }*/
-    this.props.onChangeFilterText( e.target.value );
     this.props.onChangeFilter(e.target.value);
   }
   onSelectNoteMode=(e)=>{
@@ -79,7 +45,6 @@ class App extends Component {
       noteList = <SimpleNoteList notes={this.props.filteredNotes}/>
     else if (this.props.noteList === 'Advanced')
       noteList = <AdvancedNoteList notes={this.props.filteredNotes}/>
-
     return noteList;
   }
   render() {
@@ -148,9 +113,6 @@ export default connect(
     },
     onChangeFilterMode:(mode)=>{
       dispatch({ type: 'FILTER_MODE', mode: mode })
-    },
-    onChangeFilterText:(filterText)=>{
-      dispatch({ type: 'FILTER_TEXT_CHANGE', filterText: filterText })
     },
     onChangeFilter:(text)=>{
       dispatch({ type: 'FILTER_CHANGE',filterText: text })

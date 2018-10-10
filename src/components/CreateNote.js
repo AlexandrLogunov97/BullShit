@@ -8,61 +8,25 @@ class CreateNote extends Component {
         super(props);
     }
     onCreatedNote = (e) => {
-        //if(this.state.note.title.trim().toLowerCase())
-        // this.props.onCreateNote(this.state.note);
         if (this.props.creatingNote.title.trim().toLowerCase())
             this.props.onAddNote();
     }
     onCreatedTitleChanging = (e) => {
-        /*let note = this.state.note;
-        note.title = e.target.value;
-
-        if (note.title)
-            this.setState({
-                note: note
-            });*/
         this.props.onTitleChange(e.target.value);
     }
     onCreatedEntryChanging = (e) => {
-        /*let note = this.state.note;
-        note.entry = e.target.value;
-        if (note.entry)
-            this.setState({
-                note: note
-            });
-            */
         this.props.onEntryCahnge(e.target.value);
     }
     onCreatedTagChange = (e) => {
-        /* this.setState({
-             tag: e.target.value
-         });
-         */
         this.props.onTagChange(e.target.value);
     }
     onCreatedTag = (e) => {
-        /*let note = this.state.note;
-        if (this.state.tag) {
-            if (!note.tags.find(tag => { return tag.trim().toLowerCase() === this.state.tag.trim().toLowerCase() ? tag : null }))
-                note.tags.push(this.state.tag + ' ');
-        }
-        this.setState({
-            note: note,
-            tag: ''
-        });*/
         if (this.props.tag)
             if (this.props.tag) {
                 if (!this.props.creatingNote.tags.find(tag => { return tag.trim().toLowerCase() === this.props.tag.trim().toLowerCase() ? tag : null }))
                     this.props.onTagAdd();
             }
 
-    }
-    onUpdateTags(newTags) {
-        /*let note = this.state.note;
-        note.tags = newTags;
-        this.setState({
-            note: note
-        });*/
     }
     render() {
         let tags = <TagList tagState='modify' tags={this.props.creatingNote.tags} />
@@ -85,7 +49,6 @@ class CreateNote extends Component {
 
 export default connect(
     state => ({
-        //notes: state.notes.notes
         tag: state.notes.tag,
         creatingNote: state.notes.creatingNote
         

@@ -49,7 +49,7 @@ class App extends Component {
       });
     }*/
     this.props.onChangeFilterText( e.target.value );
-    this.props.onChangeFilter();
+    this.props.onChangeFilter(e.target.value);
   }
   onSelectNoteMode=(e)=>{
     this.props.onSelectMode(e.target.value);
@@ -89,7 +89,7 @@ class App extends Component {
       <div className='App'>
         <div className='panel-left'>
           <div className='panel-top'>
-            <input placeholder='Filter' onKeyUp={this.onUpdateFilterField} onChange={this.onChangeFilterField} className='item-top-justify' />
+            <input placeholder='Filter' onKeyUp={()=>this.props.onChangeFilter} onChange={this.onChangeFilterField} className='item-top-justify' />
             <select onChange={this.onChangeFilterMode}>
               <option>Title</option>
               <option>Tags</option>
@@ -146,17 +146,14 @@ export default connect(
     onSelectMode: (mode)=>{
       dispatch({ type: 'SELECT_MODE', mode: mode })
     },
-    onSetUpdatingNote: (mode)=>{
-      dispatch({ type: 'SELECT_MODE', mode: mode })
-    },
     onChangeFilterMode:(mode)=>{
       dispatch({ type: 'FILTER_MODE', mode: mode })
     },
     onChangeFilterText:(filterText)=>{
       dispatch({ type: 'FILTER_TEXT_CHANGE', filterText: filterText })
     },
-    onChangeFilter:()=>{
-      dispatch({ type: 'FILTER_CHANGE' })
+    onChangeFilter:(text)=>{
+      dispatch({ type: 'FILTER_CHANGE',filterText: text })
     }
   })
 )(App);

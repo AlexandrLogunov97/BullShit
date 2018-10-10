@@ -54,13 +54,14 @@ export default function notes(state = initialState, action) {
         case 'ADD_NOTE': {
             return Object.assign({},state,{
                 notes: [...state.notes, state.creatingNote],
+                filteredNotes: [...state.notes, state.creatingNote],
                 creatingNote: {
                     title: '',
                     entry: '',
                     tags: [],
                     date: new Date().toDateString()
                 },
-                selectedNote: state.notes[state.notes.length-1],
+                selectedNote: state.filteredNotes[state.notes.length-1],
                 mode: 'View'
             });
         }
@@ -104,7 +105,7 @@ export default function notes(state = initialState, action) {
         }
         case 'FILTER_CHANGE':{
             let newNotes=[];
-            if (!state.filterText) {
+            if (!action.filterText) {
                 newNotes = [...state.notes];
               }
               else {
@@ -114,7 +115,7 @@ export default function notes(state = initialState, action) {
                   newNotes = [];
                   noteList.forEach(note => {
                     note.tags.forEach(tag => {
-                      if (tag.trim().toLowerCase().includes(state.filterText.trim().toLowerCase()) && newNotes.indexOf(note) === -1) {
+                      if (tag.trim().toLowerCase().includes(action.filterText.trim().toLowerCase()) && newNotes.indexOf(note) === -1) {
                         newNotes.push(note);
                       }
                     })
@@ -124,18 +125,17 @@ export default function notes(state = initialState, action) {
                 else if (state.filterMode === 'Title') {
                   newNotes = [];
                   noteList.forEach(note => {
-                      console.log(note.title);
-                    if (note.title.trim().toLowerCase().includes(state.filterText.trim().toLowerCase())) {
+                    if (note.title.trim().toLowerCase().includes(action.filterText.trim().toLowerCase())) {
                       newNotes.push(note);
                     }
                   })
           
                 }
+                return Object.assign({},state,{
+                    filteredNotes: [...newNotes],
+                    selectedNote: newNotes[0]
+                  });
               }
-              console.log(newNotes);
-              return Object.assign({},state,{
-                filteredNotes: [...newNotes]
-              });
         }
         case 'SELECT_UPDATED_NOTE': {
             break;
@@ -145,12 +145,17 @@ export default function notes(state = initialState, action) {
             let index=notes.indexOf(state.selectedNote);
             notes[index]=state.updatingNote;
             return Object.assign({},state,{
-                notes: notes
+                notes: notes,
+                filteredNotes: notes
             });
         }
         case 'DELETE_NOTE': {
+            let newNotes=state.notes.filter(note => note !== state.selectedNote);
+
             return Object.assign({},state,{
-                notes: state.notes.filter(note => note !== state.selectedNote)
+                notes: newNotes,
+                filteredNotes: newNotes,
+                selectedNote: newNotes[0]
             });
         }
         case 'CHANGE_TAG':{
@@ -194,6 +199,7 @@ export default function notes(state = initialState, action) {
             let note=Object.assign({},state.updatingNote);
             let index = note.tags.indexOf(action.tag);
             note.tags=note.tags.filter(tag=>tag!==action.tag);
+            
             return Object.assign({},state,{
                 updatingNote: note
             });

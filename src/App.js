@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  CreateNote  from "./components/CreateNote";
+import CreateNote from "./components/CreateNote";
 import ModifyNote from "./components/ModifyNote";
 import { SimpleNoteList } from './components/SimpleNoteList'
 import { AdvancedNoteList } from './components/AdvancedNoteList';
@@ -11,50 +11,42 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
-  onChangeFilterMode=(e)=> {
+  onChangeFilterMode = (e) => {
     this.props.onChangeFilterMode(e.target.value);
   }
-  onChangeFilterField=(e)=>{
+  onChangeFilterField = (e) => {
     this.props.onChangeFilter(e.target.value);
   }
-  onSelectNoteMode=(e)=>{
+  onSelectNoteMode = (e) => {
     this.props.onSelectMode(e.target.value);
   }
-  onSelectCreateMode=(e)=>{
+  onSelectCreateMode = (e) => {
     this.props.onSelectMode('Create');
   }
-  onDeleteNote=()=>{
+  onDeleteNote = () => {
     this.props.onDeleteNote(this.props.selectedNote);
   }
-  onChangeNoteList=(e)=>{
+  onChangeNoteList = (e) => {
     this.props.onSelectTypeNoteList(e.target.value);
   }
-  getField() {
+  render() {
     let field;
+    let noteList;
     if (this.props.mode === 'Create')
       field = <CreateNote onCreateNote={this.onCreateNote} />;
     else if (this.props.mode === 'View')
       field = <Note note={this.props.selectedNote} />
     else if (this.props.mode === 'Modify')
       field = <ModifyNote />
-    return field;
-  }
-  getNoteList() {
-    let noteList;
     if (this.props.noteList === 'Simple')
-      noteList = <SimpleNoteList notes={this.props.filteredNotes}/>
+      noteList = <SimpleNoteList notes={this.props.filteredNotes} />
     else if (this.props.noteList === 'Advanced')
-      noteList = <AdvancedNoteList notes={this.props.filteredNotes}/>
-    return noteList;
-  }
-  render() {
-    let field = this.getField();
-    let noteList = this.getNoteList();
+      noteList = <AdvancedNoteList notes={this.props.filteredNotes} />
     return (
       <div className='App'>
         <div className='panel-left'>
           <div className='panel-top'>
-            <input placeholder='Filter' onKeyUp={()=>this.props.onChangeFilter} onChange={this.onChangeFilterField} className='item-top-justify' />
+            <input placeholder='Filter' onKeyUp={() => this.props.onChangeFilter} onChange={this.onChangeFilterField} className='item-top-justify' />
             <select onChange={this.onChangeFilterMode}>
               <option>Title</option>
               <option>Tags</option>
@@ -105,17 +97,17 @@ export default connect(
     onDeleteNote: (note) => {
       dispatch({ type: 'DELETE_NOTE', note: note })
     },
-    onSelectTypeNoteList: (type)=>{
+    onSelectTypeNoteList: (type) => {
       dispatch({ type: 'SELECT_TYPE_NOTE_LIST', typeNoteList: type })
     },
-    onSelectMode: (mode)=>{
+    onSelectMode: (mode) => {
       dispatch({ type: 'SELECT_MODE', mode: mode })
     },
-    onChangeFilterMode:(mode)=>{
+    onChangeFilterMode: (mode) => {
       dispatch({ type: 'FILTER_MODE', mode: mode })
     },
-    onChangeFilter:(text)=>{
-      dispatch({ type: 'FILTER_CHANGE',filterText: text })
+    onChangeFilter: (text) => {
+      dispatch({ type: 'FILTER_CHANGE', filterText: text })
     }
   })
 )(App);
